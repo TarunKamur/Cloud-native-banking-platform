@@ -1,0 +1,12 @@
+replicaCount: 2
+
+image:
+  repository: btarunkumar/paisa-bank-app-frontend
+  tag: v1
+
+service:
+  type: ClusterIP
+  port: 80
+
+nodeSelector:
+  role: app
