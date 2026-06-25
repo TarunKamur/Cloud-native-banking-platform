@@ -1,0 +1,14 @@
+replicaCount: 1
+
+image:
+  repository: redis
+  tag: "7"
+
+service:
+  port: 6379
+
+storage:
+  size: 2Gi
+
+nodeSelector:
+  role: data
