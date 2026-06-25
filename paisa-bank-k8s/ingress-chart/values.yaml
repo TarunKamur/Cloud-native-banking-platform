@@ -1,0 +1,16 @@
+ingress:
+  className: nginx
+
+frontend:
+  host: paisabank-frontend.golearning.site
+  serviceName: frontend-svc
+  servicePort: 80
+
+backend:
+  host: paisabank-backend.golearning.site
+  serviceName: backend
+  servicePort: 5000
+
+tls:
+  enabled: false
+  secretName: paisabank-tls
