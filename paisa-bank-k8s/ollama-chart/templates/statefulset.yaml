@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: ollama
+
+spec:
+  serviceName: ollama-svc
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: ollama
+
+  template:
+    metadata:
+      labels:
+        app: ollama
+
+    spec:
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+
+      containers:
+      - name: ollama
+
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+
+        ports:
+        - containerPort: 11434
+
+        volumeMounts:
+        - name: ollama-data
+          mountPath: /root/.ollama
+
+  volumeClaimTemplates:
+  - metadata:
+      name: ollama-data
+
+    spec:
+      accessModes:
+      - ReadWriteOnce
+
+      resources:
+        requests:
+          storage: {{ .Values.storage.size }}

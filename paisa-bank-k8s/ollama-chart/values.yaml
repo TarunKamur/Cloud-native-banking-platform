@@ -1,0 +1,14 @@
+replicaCount: 1
+
+image:
+  repository: ollama/ollama
+  tag: latest
+
+service:
+  port: 11434
+
+storage:
+  size: 20Gi
+
+nodeSelector:
+  role: data
