@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+
+data:
+  MONGODB_URI: {{ .Values.config.MONGODB_URI | quote }}
+  REDIS_HOST: {{ .Values.config.REDIS_HOST | quote }}
+  REDIS_PORT: {{ .Values.config.REDIS_PORT | quote }}
+  OLLAMA_URL: {{ .Values.config.OLLAMA_URL | quote }}
+  NODE_ENV: {{ .Values.config.NODE_ENV | quote }}

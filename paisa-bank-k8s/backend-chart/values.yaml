@@ -1,0 +1,27 @@
+replicaCount: 2
+
+image:
+  repository: btarunkumar/paisa-bank-app-backend
+  tag: v2
+  pullPolicy: Always
+
+container:
+  port: 5000
+
+service:
+  type: ClusterIP
+  port: 5000
+  targetPort: 5000
+
+nodeSelector:
+  role: app
+
+config:
+  MONGODB_URI: "mongodb://mongodb-svc:27017/bankapp"
+  REDIS_HOST: "redis-svc"
+  REDIS_PORT: "6379"
+  OLLAMA_URL: "http://ollama-svc:11434"
+  NODE_ENV: "production"
+
+secret:
+  JWT_SECRET: "change-me"
