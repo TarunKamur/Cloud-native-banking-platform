@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://github.com/TarunKamur/Cloud-native-banking-platform.git
     targetRevision: main
-    path: ingress-chart
+    path: paisa-bank-k8s/ingress-chart
 
   destination:
     server: https://kubernetes.default.svc
