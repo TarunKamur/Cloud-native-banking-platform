@@ -1,0 +1,22 @@
+# Node
+**/node_modules/
+
+# Environment
+**/.env
+
+# Build files
+**/dist/
+**/build/
+
+# Logs
+*.log
+
+# Helm packages
+**/*.tgz
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store

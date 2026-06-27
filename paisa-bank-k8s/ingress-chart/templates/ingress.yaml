@@ -5,6 +5,8 @@ metadata:
   name: paisa-bank-ingress
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 
 spec:
   ingressClassName: {{ .Values.ingress.className }}
@@ -18,7 +20,6 @@ spec:
 {{- end }}
 
   rules:
-
   - host: {{ .Values.frontend.host }}
     http:
       paths:
@@ -33,8 +34,8 @@ spec:
   - host: {{ .Values.backend.host }}
     http:
       paths:
-      - path: /api
-        pathType: Prefix
+      - path: /api(/|$)(.*)
+        pathType: ImplementationSpecific
         backend:
           service:
             name: {{ .Values.backend.serviceName }}
