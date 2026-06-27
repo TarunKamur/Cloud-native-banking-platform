@@ -6,34 +6,33 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
 
 spec:
   ingressClassName: {{ .Values.ingress.className }}
 
 {{- if .Values.tls.enabled }}
   tls:
-  - hosts:
-    - {{ .Values.frontend.host }}
-    secretName: {{ .Values.tls.secretName }}
+    - hosts:
+        - {{ .Values.frontend.host }}
+      secretName: {{ .Values.tls.secretName }}
 {{- end }}
 
   rules:
-  - host: {{ .Values.frontend.host }}
-    http:
-      paths:
-      - path: /api(/|$)(.*)
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: {{ .Values.backend.serviceName }}
-            port:
-              number: {{ .Values.backend.servicePort }}
+    - host: {{ .Values.frontend.host }}
+      http:
+        paths:
+          - path: /api(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ .Values.backend.serviceName }}
+                port:
+                  number: {{ .Values.backend.servicePort }}
 
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: {{ .Values.frontend.serviceName }}
-            port:
-              number: {{ .Values.frontend.servicePort }}
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.frontend.serviceName }}
+                port:
+                  number: {{ .Values.frontend.servicePort }}
