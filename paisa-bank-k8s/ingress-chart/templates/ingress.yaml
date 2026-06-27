@@ -15,23 +15,11 @@ spec:
   tls:
   - hosts:
     - {{ .Values.frontend.host }}
-    - {{ .Values.backend.host }}
     secretName: {{ .Values.tls.secretName }}
 {{- end }}
 
   rules:
   - host: {{ .Values.frontend.host }}
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: {{ .Values.frontend.serviceName }}
-            port:
-              number: {{ .Values.frontend.servicePort }}
-
-  - host: {{ .Values.backend.host }}
     http:
       paths:
       - path: /api(/|$)(.*)
@@ -41,3 +29,11 @@ spec:
             name: {{ .Values.backend.serviceName }}
             port:
               number: {{ .Values.backend.servicePort }}
+
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.frontend.serviceName }}
+            port:
+              number: {{ .Values.frontend.servicePort }}
