@@ -1,0 +1,30 @@
+grafana:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+
+    hosts:
+      - grafana.golearning.site
+
+    path: /
+
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+
+prometheus:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+
+    hosts:
+      - prometheus.golearning.site
+
+    paths:
+      - /
+
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+
+alertmanager:
+  ingress:
+    enabled: false

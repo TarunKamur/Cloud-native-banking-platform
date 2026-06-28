@@ -1,0 +1,38 @@
+global:
+  domain: argocd.golearning.site
+
+configs:
+  params:
+    server.insecure: true
+
+server:
+  replicas: 1
+
+  service:
+    type: ClusterIP
+
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hostname: argocd.golearning.site
+
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+
+controller:
+  replicas: 1
+
+repoServer:
+  replicas: 1
+
+applicationSet:
+  replicas: 1
+
+redis:
+  enabled: true
+
+dex:
+  enabled: true
+
+notifications:
+  enabled: true
